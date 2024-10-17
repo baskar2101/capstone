@@ -1,0 +1,7 @@
+/* src/app/components/dashboard/dashboard.component.css */
+mat-card {
+    max-width: 600px;
+    margin: 50px auto;
+    text-align: center;
+  }
+  
