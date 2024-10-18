@@ -1,6 +1,15 @@
+// src/main.ts
+import { enableProdMode } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
+import { appConfig } from './app/app.config'; // Make sure this points to the correct export
+import { environment } from './app/environments/environment'; // Ensure this path is correct
 
-bootstrapApplication(AppComponent, appConfig)
-  .catch((err) => console.error(err));
+if (environment.production) {
+  enableProdMode();
+}
+
+// Bootstrap the application
+const bootstrap = () => bootstrapApplication(AppComponent, appConfig);
+
+bootstrap();

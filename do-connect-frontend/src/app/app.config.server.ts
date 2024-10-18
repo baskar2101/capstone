@@ -1,11 +1,5 @@
-import { mergeApplicationConfig, ApplicationConfig } from '@angular/core';
-import { provideServerRendering } from '@angular/platform-server';
-import { appConfig } from './app.config';
-
-const serverConfig: ApplicationConfig = {
-  providers: [
-    provideServerRendering()
-  ]
+// src/app/app.config.server.ts
+export const config = {
+  apiUrl: 'http://localhost:3000/api', // Example API URL
+  // other server-specific configurations
 };
-
-export const config = mergeApplicationConfig(appConfig, serverConfig);

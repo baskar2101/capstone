@@ -1,18 +1,13 @@
-// src/app/app-routing.module.ts
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { AuthGuard } from './guards/auth.guard'; // To be created for route protection
+import { LoginComponent } from './components/login/login.component'; // Adjust the import paths
+import { RegisterComponent } from './components/register/register.component'; // Adjust the import paths
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' }, // Redirect to login on app load
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   // Add more routes as needed
-  { path: '**', redirectTo: '/login' } // Wildcard route
 ];
 
 @NgModule({

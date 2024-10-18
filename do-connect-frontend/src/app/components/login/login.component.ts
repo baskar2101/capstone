@@ -1,30 +1,29 @@
-// src/app/components/login/login.component.ts
 import { Component } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { AuthService, LoginResponse } from '../services/auth.service'; // Adjust this path based on the structure
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-
-  email: string = '';
+  username: string = '';
   password: string = '';
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) {}
 
   onLogin() {
-    this.authService.login(this.email, this.password).subscribe({
-      next: (res) => {
-        console.log('Login successful', res);
-        this.router.navigate(['/dashboard']);
+    this.authService.login(this.username, this.password).subscribe({
+      next: (response: LoginResponse) => {
+        console.log('Login successful', response);
+        localStorage.setItem('token', response.token);
+        this.router.navigate(['/home']);
       },
-      error: (err) => {
+      error: (err: HttpErrorResponse) => {
         console.error('Login failed', err);
-        alert(err.error.msg || 'Login failed');
-      }
+      },
     });
   }
 }

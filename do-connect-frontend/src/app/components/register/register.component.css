@@ -1,9 +1,0 @@
-/* src/app/components/register/register.component.css */
-.full-width {
-    width: 100%;
-  }
-  mat-card {
-    max-width: 400px;
-    margin: 50px auto;
-  }
-  

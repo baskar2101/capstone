@@ -1,33 +1,28 @@
-// src/app/components/register/register.component.ts
 import { Component } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../app/services/authService';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http'; // Import HttpErrorResponse
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
-
-  name: string = '';
-  email: string = '';
+  username: string = '';
   password: string = '';
-  role: string = 'user';
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) {}
 
   onRegister() {
-    const userData = { name: this.name, email: this.email, password: this.password, role: this.role };
-    this.authService.register(userData).subscribe({
-      next: (res) => {
-        console.log('Registration successful', res);
-        this.router.navigate(['/dashboard']);
+    this.authService.register(this.username, this.password).subscribe({
+      next: () => {
+        console.log('Registration successful');
+        this.router.navigate(['/login']);
       },
-      error: (err) => {
+      error: (err: HttpErrorResponse) => { // Specify the type for err
         console.error('Registration failed', err);
-        alert(err.error.msg || 'Registration failed');
-      }
+      },
     });
   }
 }
